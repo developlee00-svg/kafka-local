@@ -97,3 +97,26 @@ root@4527e52ba5f6:/# cd /opt/kafka/bin
 시각화/분석  :     OpenSearch (DB)      <---( 인덱싱 및 검색 )------>  대시보드 (Kibana)
 ====================================================================================================
 ```
+
+# 프로젝트 재구성
+```
+    docker compose down
+    docker compose up -d
+```
+
+# Fluentd(40~60MB) / Fluent-Bit(1~5MB)
+- 태그 기반 라우팅 도구(Tag Based Routing)
+- Ruby(C 기반) 구조/ C 구조
+- fluent-bit/etc/fluent-bit.conf 에서 구성 기술 완료
+- 목표
+    - 데이터 수집, 처리, 전달 -> ETL 도구
+    - 경량형 오픈 소스 프로세서
+    - 고가용성, 고성능 처리, 데이터 처리 안정성 높음.
+- 파이프라인
+    - Input, Output, Service, Parser, Filter, Buffer, Routing
+    - Input : 파일, 시스템 매트릭, HTTP 스트림, ... 다양한 소스에서 제공받을 수 있음.
+    - Output : Kafka/OpenSearch/ElasticSearch/S3/... 모두 가능함. 검색 엔진으로 보낼 수도 있고 실시간 스트리밍으로 쓸 수도 있고 데이터 레이크에 저장할 수도 있음.
+- conf 구성 : 규칙 기술하는 것임.
+
+- 지원 플러그인
+    - Fluentd : 1000여개 / Fluent-Bit : 100여개
